@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>교육 자료 · 5회차</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Nanum+Gothic+Coding:wght@400;700&display=swap">
+<style>
+:root{
+  --ground:#ffffff;
+  --surface:#f6f8fb;
+  --surface-2:#eceff4;
+  --line:#dde1e8;
+  --ink:#141c28;
+  --ink-soft:#5c6675;
+  --accent:#1b3252;
+  --accent-deep:#0e1f38;
+  --accent-soft:#e5eaf2;
+  --mark-ink:#8a5206;
+  --mark-bg:#fdf1dd;
+  --mark-line:#e8c691;
+  --ok:#1a6b48;
+  --radius:14px;
+  --step:1;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#12161d;--surface:#1a2029;--surface-2:#222a35;--line:#333d4b;
+    --ink:#e8ecf2;--ink-soft:#a3aec0;--accent:#3d6aa3;--accent-deep:#5c8bc4;
+    --accent-soft:#232f42;--mark-ink:#f2c684;--mark-bg:#3a2c14;--mark-line:#6b5124;--ok:#5cbd91;
+  }
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--ground);color:var(--ink);
+  font-family:"Pretendard Variable","Pretendard","Nanum Gothic","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  font-size:calc(17px * var(--step));line-height:1.75;-webkit-text-size-adjust:100%;
+}
+.wrap{max-width:840px;margin:0 auto;padding:0 20px 80px}
+.masthead{padding:44px 0 26px;border-bottom:2px solid var(--line)}
+.eyebrow{font-size:.82em;font-weight:700;letter-spacing:.14em;color:var(--accent);margin:0 0 10px}
+h1{font-size:2.1em;font-weight:800;line-height:1.25;margin:0 0 12px;letter-spacing:-.01em}
+.lede{margin:0;color:var(--ink-soft);font-size:1.02em}
+.lede strong{color:var(--ink)}
+.toolbar{position:sticky;top:0;z-index:20;background:var(--ground);border-bottom:1px solid var(--line);padding:10px 0;margin-bottom:8px}
+.toolbar-inner{max-width:840px;margin:0 auto;padding:0 20px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.jump{display:flex;gap:6px;flex-wrap:nowrap;flex:1 1 0;min-width:0;overflow-x:auto;scrollbar-width:none}
+.jump::-webkit-scrollbar{display:none}
+.toolbar-inner{flex-wrap:nowrap}
+.jump a{flex:0 0 auto;padding:7px 13px;border-radius:999px;background:var(--surface);color:var(--ink-soft);text-decoration:none;font-size:.86em;font-weight:700;border:1px solid transparent;white-space:nowrap}
+.jump a:hover,.jump a:focus-visible{background:var(--accent-soft);color:var(--accent-deep);border-color:var(--accent)}
+.sizer{display:flex;align-items:center;gap:7px;flex:0 0 auto}
+.sizer span{font-size:.82em;color:var(--ink-soft);font-weight:700}
+.sizer button{width:38px;height:38px;border-radius:9px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-family:inherit;font-weight:800;cursor:pointer;font-size:1em;line-height:1}
+section{margin-top:52px;scroll-margin-top:76px}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sec-num{font-family:"Nanum Gothic Coding",monospace;font-size:1.5em;font-weight:700;color:var(--accent)}
+h2{font-size:1.5em;font-weight:800;margin:0;letter-spacing:-.01em}
+.sec-note{margin:0 0 22px;color:var(--ink-soft)}
+.sub{font-size:1.18em;font-weight:800;margin:34px 0 12px;color:var(--accent-deep)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px 22px 20px;margin-bottom:18px}
+.card h3{font-size:1.14em;font-weight:800;margin:0 0 8px}
+.card p{margin:0 0 14px;color:var(--ink-soft)}
+.card strong{color:var(--ink)}
+pre{
+  margin:0 0 14px;
+  background:#1a2029 !important;
+  color:#e8ecf2 !important;
+  border:1px solid #333d4b;
+  border-radius:10px;
+  padding:18px;
+  font-family:"Nanum Gothic Coding","D2Coding",monospace;
+  font-size:.98em;
+  line-height:1.85;
+  white-space:pre-wrap;
+  word-break:break-word;
+  overflow-x:auto;
+}
+.ph{color:var(--mark-ink);font-weight:700;background:var(--mark-bg);box-shadow:inset 0 0 0 1px var(--mark-line);border-radius:4px;padding:1px 4px}
+pre .ph{color:#f2c684;background:#3a2c14;box-shadow:inset 0 0 0 1px #6b5124}
+button.copy{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;min-height:58px;border:none;border-radius:10px;background:var(--accent);color:#fff;font-family:inherit;font-size:1.05em;font-weight:800;cursor:pointer}
+button.copy:hover{background:var(--accent-deep)}
+button.copy.done{background:var(--ok)}
+button.copy .ico{font-family:"Nanum Gothic Coding",monospace;font-weight:700}
+.chips{display:grid;gap:10px}
+@media(min-width:620px){.chips{grid-template-columns:1fr 1fr}}
+.chips.one{grid-template-columns:1fr}
+button.chip{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:56px;padding:12px 16px;border:1px solid var(--line);border-radius:10px;background:var(--ground);color:var(--ink);font-family:"Nanum Gothic Coding",monospace;font-size:.96em;font-weight:700;text-align:left;cursor:pointer}
+button.chip:hover{border-color:var(--accent);background:var(--accent-soft)}
+button.chip.done{background:var(--ok);color:#fff;border-color:var(--ok)}
+button.chip .tag{font-family:inherit;font-size:.82em;font-weight:700;opacity:.65;flex:0 0 auto}
+.note{display:flex;gap:11px;background:var(--surface-2);border-radius:10px;padding:13px 15px;font-size:.94em;color:var(--ink-soft);margin-top:14px}
+.note b{flex:0 0 auto;font-weight:800;color:var(--accent-deep)}
+.note p{margin:0;color:inherit}
+ol.steps{margin:0;padding:0;list-style:none;counter-reset:s}
+ol.steps li{counter-increment:s;display:flex;gap:14px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--line)}
+ol.steps li:last-child{border-bottom:none}
+ol.steps li::before{content:counter(s);flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;font-family:"Nanum Gothic Coding",monospace;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:.9em;margin-top:2px}
+ol.steps b{font-weight:800}
+.mlabel{display:block;font-weight:800;font-size:.9em;color:var(--accent-deep);margin:0 0 6px}
+details.more{margin-top:16px;background:var(--ground);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+details.more summary{padding:15px 18px;font-weight:800;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary::after{content:'＋';font-weight:800;color:var(--accent)}
+details.more[open] summary{border-bottom:1px solid var(--line)}
+details.more[open] summary::after{content:'－'}
+.more-body{padding:16px 18px 18px}
+.linkbtn{display:flex;align-items:center;justify-content:center;min-height:58px;border-radius:10px;margin:0 0 16px;background:var(--accent);color:#fff;font-weight:800;font-size:1.05em;text-decoration:none;text-align:center;padding:8px 14px}
+.linkbtn:hover{background:var(--accent-deep)}
+.banner{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;background:var(--surface-2);border-radius:var(--radius);padding:16px 20px;margin-top:24px}
+.banner .label{font-weight:800;font-size:.9em;color:var(--accent-deep)}
+.banner .addr{font-family:"Nanum Gothic Coding",monospace;font-weight:700;font-size:1.08em}
+/* 표 */
+.tbl{width:100%;border-collapse:collapse;font-size:.95em;background:var(--ground);border-radius:10px;overflow:hidden}
+.tbl th,.tbl td{border-bottom:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+.tbl th{background:var(--accent-soft);color:var(--accent-deep);font-weight:800}
+.tbl tr:last-child td{border-bottom:none}
+.tbl td:first-child{font-weight:800;white-space:nowrap}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+/* 퇴고: 이렇게 말하면 → 이렇게 */
+.swap{display:grid;gap:6px;margin-bottom:12px}
+.swap .before{font-size:.92em;color:var(--ink-soft);font-weight:700}
+.swap .before s{opacity:.8}
+/* 체크리스트 */
+ul.check{list-style:none;margin:0;padding:0}
+ul.check li{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)}
+ul.check li:last-child{border-bottom:none}
+ul.check input{width:22px;height:22px;margin-top:4px;flex:0 0 auto;accent-color:var(--ok)}
+ul.check label{cursor:pointer}
+/* QR */
+.qr-row{display:flex;flex-wrap:wrap;gap:10px}
+.qr-row input{flex:1 1 240px;min-height:52px;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--ground);color:var(--ink);font-family:inherit;font-size:1em}
+.qr-row button{min-height:52px;padding:0 20px;border:none;border-radius:10px;background:var(--accent);color:#fff;font-family:inherit;font-weight:800;font-size:1em;cursor:pointer}
+#qrcode{margin-top:18px}
+#qrcode img,#qrcode canvas{background:#fff;padding:10px;border-radius:8px}
+footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--line);color:var(--ink-soft);font-size:.9em}
+@media (prefers-reduced-motion: no-preference){
+  button.copy,button.chip{transition:background .15s ease,border-color .15s ease}
+}
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="toolbar-inner">
+    <nav class="jump" aria-label="바로가기">
+      <a href="#s0">0 시작하기</a>
+      <a href="#s1">1 AI로 긴 글쓰기</a>
+      <a href="#s2">2 주제별 시작</a>
+      <a href="#s3">3 Gemini Notebook</a>
+      <a href="#s4">4 나만의 노트북</a>
+    </nav>
+    <div class="sizer">
+      <span>글자</span>
+      <button type="button" id="smaller" aria-label="글자 작게">－</button>
+      <button type="button" id="bigger" aria-label="글자 크게">＋</button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow">교육 프로그램 · 5회차</p>
+  <h1>AI와 일상, AI와 업무</h1>
+  <p class="lede">오늘 쓸 프롬프트가 순서대로 담겨 있습니다. <strong>복사하기 버튼</strong>을 누르면 문장이 복사되고, <span class="ph">[노란 칸]</span>만 내 이야기로 바꾸면 됩니다.</p>
+</header>
+
+<!-- ───────────── 0. 시작하기 ───────────── -->
+<section id="s0">
+  <div class="sec-head"><span class="sec-num">0</span><h2>시작하기</h2></div>
+  <p class="sec-note">프롬프트를 쓰는 방법과 오늘 배운 용어입니다.</p>
+
+  <div class="card">
+    <h3>프롬프트 쓰는 순서</h3>
+    <ol class="steps">
+      <li><span><b>복사하기</b> 버튼을 누릅니다.</span></li>
+      <li><span>AI 대화창(Gemini 또는 ChatGPT)을 누르고 <b>Ctrl + V</b>로 붙여넣습니다.</span></li>
+      <li><span><b>[대괄호]</b> 안의 글자를 지우고 내 내용을 씁니다. 대괄호 기호도 함께 지웁니다.</span></li>
+      <li><span><b>엔터</b>를 누르고 AI의 답을 기다립니다.</span></li>
+    </ol>
+    <div class="note"><b>TIP</b><p>타자가 힘들 때는 대화창의 마이크 모양 버튼을 눌러 말로 입력해 보세요.</p></div>
+  </div>
+
+  <div class="card">
+    <h3>좋은 질문의 공식</h3>
+    <p>아래 네 가지를 넣으면 원하는 답이 훨씬 잘 나옵니다.</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>넣을 것</th><th>예시</th></tr>
+        <tr><td>무엇을</td><td>블로그 여행기를 써줘</td></tr>
+        <tr><td>누가 읽나</td><td>대전 여행을 계획하는 50~60대</td></tr>
+        <tr><td>얼마나</td><td>1,500자 정도</td></tr>
+        <tr><td>어떤 말투로</td><td>친구에게 이야기하듯 편안한 존댓말</td></tr>
+      </table>
+    </div>
+
+    <details class="more">
+      <summary>오늘 배운 AI 용어 한눈에</summary>
+      <div class="more-body">
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <tr><th>용어</th><th>쉬운 뜻</th><th>우리 주변 예</th></tr>
+            <tr><td>인공지능 (AI)</td><td>사람처럼 생각하고 판단하도록 만든 컴퓨터 기술 전체</td><td>내비게이션 최단 경로 안내</td></tr>
+            <tr><td>머신러닝</td><td>데이터를 보고 스스로 규칙을 찾아내는 AI</td><td>스팸 메일 걸러내기, 상품 추천</td></tr>
+            <tr><td>딥러닝</td><td>뇌 신경망을 본떠 더 복잡한 것까지 배우는 머신러닝</td><td>얼굴 인식, 번역기, ChatGPT</td></tr>
+            <tr><td>피지컬 AI</td><td>현실을 보고 판단해서 직접 움직이는 AI</td><td>로봇청소기, 자율주행차</td></tr>
+            <tr><td>멀티모달</td><td>글·사진·목소리·영상을 한꺼번에 알아듣는 AI</td><td>꽃 사진 찍고 "무슨 꽃이에요?"</td></tr>
+            <tr><td>RAG</td><td>내가 준 자료에서 먼저 찾아본 뒤 답하는 방식</td><td>Gemini Notebook</td></tr>
+          </table>
+        </div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ───────────── 1. AI로 긴 글쓰기 ───────────── -->
+<section id="s1">
+  <div class="sec-head"><span class="sec-num">1</span><h2>AI로 긴 글쓰기</h2></div>
+  <p class="sec-note">개요 → 초안 → 퇴고 → 점검 → 완성본, 다섯 단계로 나눠 씁니다. 예시는 '대전 1박 2일 여행기'입니다.</p>
+
+  <div class="note"><b>기억할 것</b><p><strong>재료는 내가 줍니다</strong>(사실·기억·감정은 AI가 모릅니다) · <strong>한 번에 다 하지 않습니다</strong> · <strong>고칠 때는 구체적으로</strong> ('좋게' 대신 '더 짧게', '더 따뜻하게')</p></div>
+
+  <h3 class="sub">① 개요 잡기</h3>
+
+  <div class="card">
+    <h3>글감 모으기 — AI가 나에게 질문하게 하기</h3>
+    <p>'여행기 써줘'만 하면 AI가 내 여행을 지어냅니다. 먼저 AI가 묻고, 내가 답합니다.</p>
+    <pre data-copy>[지난주에 다녀온 대전 1박 2일 여행기]를 [블로그]에 올리려고 해.
+나한테 질문을 5개 해주고, 내 답을 바탕으로 글을 써줘.
+한 번에 하나씩 물어봐줘.</pre>
+    <button class="copy" type="button"><span class="ico">⧉</span>복사하기</button>
+  </div>
+
+  <div class="card">
+    <h3>답이 부족할 때</h3>
+    <pre data-copy>내 답 중에 더 자세히 들으면 좋을 부분이 있으면 2가지만 더 물어봐줘.</pre>
+    <button class="copy" type="button"><span class="ico">⧉</span>복사하기</button>
+  </div>
+
+  <div class="card">
+    <h3>뼈대(개요) 요청</h3>
+    <pre data-copy>지금까지 내 답을 바탕으로 [블로그 글] 개요를 짜줘.
+소제목 4~5개로 나누고, 소제목마다 들어갈 내용을 한 줄로 적어줘.
+아직 본문은 쓰지 마.</pre>
+    <button class="copy" type="button"><span class="ico">⧉</span>복사하기</button>
+  </div>
+
+  <h3 class="sub">② 초안 받아보기</h3>
+
+  <div class="card">
+    <h3>초안 요청</h3>
+    <p>개요가 마음에 들면 분량, 말투, 읽을 사람을 정해서 초안을 받습니다.</p>
+    <pre data-copy>좋아, 이 개요대로 [블로그 글] 초안을 써줘.
+- 분량: [1,500자] 정도
+- 말투: [친구에게 이야기하듯 편안한 존댓말]
+- 읽을 사람: [대전 여행을 계획하는 50~60대]
+- 내가 말하지 않은 내용은 지어내지 마.</pre>
+    <button class="copy" type="button"><span class="ico">⧉</span>복사하기</button>
+  </div>
+
+  <div class="card">
+    <h3>초안을 받은 뒤 확인</h3>
+    <pre data-copy>초안에서 내가 말하지 않은 내용이 들어간 곳을 표시해줘.</pre>
+    <button class="copy" type="button"><span class="ico">⧉</span>복사하기</button>
+  </div>
+
+  <h3 class="sub">③ 퇴고하기</h3>
+
+  <div class="card">
+    <h3>'어디를, 어떻게' 고칠지 말하기</h3>
+    <p>막연한 말 대신, 아래처럼 바꿔 말하면 AI가 원하는 대로 고칩니다.</p>
+    <div class="swap">
+      <span class="before">"더 좋게 고쳐줘" 대신</span>
+      <div class="chips one"><button class="chip" type="button" data-copy="첫 문단을 더 짧고 궁금하게 바꿔줘. 세 문장 이내로.">첫 문단을 더 짧고 궁금하게 바꿔줘. 세 문장 이내로.<span class="tag">복사</span></button></div>
+    </div>
+    <div class="swap">
+      <span class="before">"너무 길어" 대신</span>
+      <div class="chips one"><button class="chip" type="button" data-copy="전체를 1,000자로 줄여줘. 성심당에서 빵 산 이야기는 꼭 남겨줘.">전체를 1,000자로 줄여줘. 성심당에서 빵 산 이야기는 꼭 남겨줘.<span class="tag">복사</span></button></div>
+    </div>
+    <div class="swap">
+      <span class="before">"말투가 어색해" 대신</span>
+      <div class="chips one"><button class="chip" type="button" data-copy="'~했습니다'가 너무 반복돼. 문장 끝을 자연스럽게 바꿔줘.">'~했습니다'가 너무 반복돼. 문장 끝을 자연스럽게 바꿔줘.<span class="tag">복사</span></button></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>부분만 고치기</h3>
+    <p>글 전체를 다시 쓰게 하면 마음에 들던 부분까지 바뀝니다. 한 번에 한 곳씩 고칩니다.</p>
+    <pre data-copy>[두 번째 소제목] 부분만 다시 써줘. 나머지는 그대로 둬.</pre>
+    <button class="copy" type="button"><span class="ico">⧉</span>복사하기</button>
+  </div>
+
+  <div class="card">
+    <h3>내 표현 살리기</h3>
+    <pre data-copy>'[빵 냄새에 발걸음이 저절로 멈췄다]'는 내가 쓴 표현이야.
+이 문장은 바꾸지 말고 그대로 살려줘.</pre>
+    <button class="copy" type="button"><span class="ico">⧉</span>복사하기</button>
+  </div>
+
+  <div class="card">
+    <h3>고친 곳 확인</h3>
+    <pre data-copy>방금 고친 부분이 어디인지, 고치기 전과 후를 나란히 보여줘.</pre>
+    <button class="copy" type="button"><span class="ico">⧉</span>복사하기</button>
+  </div>
+
+  <h3 class="sub">④ 글 점검하기</h3>
+
+  <div class="card">
+    <h3>사실 확인</h3>
+    <p>고치기 전에 문제부터 찾아 달라고 하고, 고칠지는 내가 정합니다.</p>
+    <pre data-copy>글에 나온 장소 이름, 운영 시간, 가격 중 확인이 필요한 부분을 목록으로 알려줘.</pre>
+    <button class="copy" type="button"><span class="ico">⧉</span>복사하기</button>
+  </div>
+
+  <div class="card">
+    <h3>맞춤법</h3>
+    <pre data-copy>맞춤법과 띄어쓰기가 틀린 곳만 찾아줘. 글은 고치지 말고 목록으로만 보여줘.</pre>
+    <button class="copy" type="button"><span class="ico">⧉</span>복사하기</button>
+  </div>
+
+  <div class="card">
+    <h3>독자 입장에서 읽기</h3>
+    <pre data-copy>[대전에 처음 가는 60대] 독자라고 생각하고 읽어줘.
+이해가 안 되거나 더 알고 싶은 부분을 3가지 말해줘.</pre>
+    <button class="copy" type="button"><span class="ico">⧉</span>복사하기</button>
+    <div class="note"><b>확인</b><p>AI가 알려준 운영 시간, 가격은 공식 홈페이지나 지도 앱에서 한 번 더 확인하세요.</p></div>
+  </div>
+
+  <h3 class="sub">⑤ 완성본 만들기</h3>
+
+  <div class="card">
+    <h3>최종본 정리</h3>
+    <pre data-copy>지금까지 고친 내용을 모두 반영해서 최종본을 처음부터 끝까지 다시 보여줘.</pre>
+    <button class="copy" type="button"><span class="ico">⧉</span>복사하기</button>
+  </div>
+
+  <div class="card">
+    <h3>제목 정하기</h3>
+    <pre data-copy>이 글에 어울리는 [블로그] 제목을 5개 추천해줘.
+읽는 사람이 눌러 보고 싶어지는 제목으로.</pre>
+    <button class="copy" type="button"><span class="ico">⧉</span>복사하기</button>
+  </div>
+
+  <div class="card">
+    <h3>올릴 준비</h3>
+    <pre data-copy>블로그에 올릴 해시태그 10개를 만들어주고,
+사진을 넣으면 좋을 위치를 (사진) 으로 표시해줘.</pre>
+    <button class="copy" type="button"><span class="ico">⧉</span>복사하기</button>
+    <div class="note"><b>마지막</b><p>올리기 전에 소리 내어 한 번 읽어 보고, 내 목소리처럼 들리는지 확인하세요.</p></div>
+  </div>
+</section>
+
+<!-- ───────────── 2. 주제별 시작 ───────────── -->
+<section id="s2">
+  <div class="sec-head"><span class="sec-num">2</span><h2>주제별 바로 시작하기</h2></div>
+  <p class="sec-note">내 경험이 담긴 주제일수록 AI 인터뷰에 답할 이야기가 많습니다. 시작한 뒤 1번의 ②~⑤단계를 이어서 따라 하세요.</p>
+
+  <div class="card">
+    <h3>내 인생의 첫 직장</h3>
+    <p>자녀에게 남기는 회고록</p>
+    <pre data-copy>내 첫 직장 이야기를 글로 남기고 싶어. 인터뷰하듯 하나씩 물어봐줘.</pre>
+    <button class="copy" type="button"><span class="ico">⧉</span>복사하기</button>
+  </div>
+
+  <div class="card">
+    <h3>우리 집 손맛 레시피</h3>
+    <p>요리법과 그 음식에 얽힌 추억</p>
+    <pre data-copy>[어머니께 배운 된장찌개] 이야기를 쓰고 싶어. 재료부터 하나씩 물어봐줘.</pre>
+    <button class="copy" type="button"><span class="ico">⧉</span>복사하기</button>
+  </div>
+
+  <div class="card">
+    <h3>나의 건강 습관</h3>
+    <p>걷기, 등산 등 직접 해본 경험기</p>
+    <pre data-copy>[매일 만 보 걷기를 1년] 해본 이야기를 쓰려고 해. 하나씩 물어봐줘.</pre>
+    <button class="copy" type="button"><span class="ico">⧉</span>복사하기</button>
+  </div>
+
+  <div class="card">
+    <h3>손주에게 쓰는 편지</h3>
+    <p>전하고 싶은 삶의 지혜</p>
+    <pre data-copy>[손주가 스무 살이 되면] 읽을 편지를 쓰고 싶어. 하나씩 물어봐줘.</pre>
+    <button class="copy" type="button"><span class="ico">⧉</span>복사하기</button>
+  </div>
+
+  <details class="more">
+    <summary>다른 종류의 글도 같은 방법으로</summary>
+    <div class="more-body">
+      <div class="card">
+        <h3>모임에서 읽을 인사말</h3>
+        <pre data-copy>[동창회 송년 모임]에서 읽을 [3분] 인사말을 쓰려고 해.
+말투는 [밝고 유쾌하게] 해줘.
+먼저 나한테 필요한 것을 하나씩 물어봐줘.</pre>
+        <button class="copy" type="button"><span class="ico">⧉</span>복사하기</button>
+      </div>
+      <div class="card">
+        <h3>지인에게 쓰는 편지</h3>
+        <pre data-copy>[오랜만에 연락하는 대학 동기]에게 편지를 쓰고 싶어.
+내 마음을 잘 담을 수 있게 하나씩 물어봐줘.</pre>
+        <button class="copy" type="button"><span class="ico">⧉</span>복사하기</button>
+      </div>
+      <div class="card">
+        <h3>경력 소개서</h3>
+        <pre data-copy>[지원하려는 일]에 낼 경력 소개서를 쓰려고 해.
+내가 해온 일과 잘하는 것을 하나씩 물어봐줘.
+분량은 [A4 한 장]으로 해줘.</pre>
+        <button class="copy" type="button"><span class="ico">⧉</span>복사하기</button>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ───────────── 3. Gemini Notebook ───────────── -->
+<section id="s3">
+  <div class="sec-head"><span class="sec-num">3</span><h2>Gemini Notebook — 내 자료와 대화하기</h2></div>
+  <p class="sec-note">내가 올린 자료(PDF, 구글 문서, 웹페이지, 유튜브 링크)만 보고 답하고, 근거가 된 곳을 번호로 보여줍니다.</p>
+
+  <div class="card">
+    <h3>시작하기</h3>
+    <ol class="steps">
+      <li><span>크롬에서 구글 계정으로 로그인한 뒤 <b>Gemini Notebook</b>에 접속합니다.</span></li>
+      <li><span><b>새 노트북</b>을 만들고 자료(소스)를 올립니다. 파일을 끌어다 놓거나 유튜브 주소를 붙여넣습니다.</span></li>
+      <li><span>가운데 대화창에 아래 프롬프트를 붙여넣어 질문합니다.</span></li>
+      <li><span>답 속 <b>작은 숫자</b>를 누르면 근거가 된 자료 부분을 확인할 수 있습니다.</span></li>
+    </ol>
+  </div>
+
+  <a class="linkbtn" href="https://notebook.google.com/notebook/55ca40b6-75f4-4516-92ee-d9316f27f600" target="_blank" rel="noopener">실습 노트북 열기 (공인중개사 기출문제 · 강의 영상)</a>
+
+  <h3 class="sub">자료에 질문하기</h3>
+
+  <div class="card">
+    <h3>핵심 요약</h3>
+    <pre data-copy>[부동산학개론]의 중요 내용을 요약해줘.</pre>
+    <button class="copy" type="button"><span class="ico">⧉</span>복사하기</button>
+  </div>
+
+  <div class="card">
+    <h3>쉽게 풀어 설명</h3>
+    <pre data-copy>[최유효이용]이 무슨 뜻인지 중학생도 알 수 있게 생활 속 예를 들어 설명해줘.</pre>
+    <button class="copy" type="button"><span class="ico">⧉</span>복사하기</button>
+  </div>
+
+  <div class="card">
+    <h3>표로 정리</h3>
+    <pre data-copy>자료에 나오는 [주요 용어]를 표로 정리해줘. 열은 '용어 / 뜻 / 예시'로.</pre>
+    <button class="copy" type="button"><span class="ico">⧉</span>복사하기</button>
+  </div>
+
+  <div class="card">
+    <h3>자료 밖 내용 막기</h3>
+    <pre data-copy>올린 자료에 있는 내용으로만 답해줘. 자료에 없으면 '자료에 없음'이라고 말해줘.</pre>
+    <button class="copy" type="button"><span class="ico">⧉</span>복사하기</button>
+  </div>
+
+  <div class="card">
+    <h3>영상 내용 정리</h3>
+    <pre data-copy>올린 유튜브 강의에서 강사가 강조한 내용을 5가지로 정리해줘.</pre>
+    <button class="copy" type="button"><span class="ico">⧉</span>복사하기</button>
+  </div>
+
+  <h3 class="sub">스튜디오 기능 — 버튼 하나로 다른 형태로 바꾸기</h3>
+
+  <div class="card">
+    <p>화면 오른쪽 <strong>'스튜디오'</strong>에서 만들 항목을 고릅니다. 만들기 전에 <strong>'맞춤설정'</strong>을 누르면 아래 요청 사항을 적을 수 있습니다.</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>기능</th><th>무엇을 만들어 주나</th></tr>
+        <tr><td>오디오 개요</td><td>두 사람이 대화하듯 설명하는 팟캐스트. 산책하며 듣기 좋습니다.</td></tr>
+        <tr><td>동영상 개요</td><td>그림과 내레이션으로 내용을 요약한 영상</td></tr>
+        <tr><td>마인드맵</td><td>개념끼리 어떻게 연결되는지 보여주는 한 장짜리 지도</td></tr>
+        <tr><td>보고서·학습 가이드</td><td>요약 문서, 자주 묻는 질문, 공부용 정리 노트</td></tr>
+        <tr><td>퀴즈·플래시카드</td><td>문제를 풀며 외우고, 정답의 근거를 자료에서 확인</td></tr>
+        <tr><td>슬라이드·인포그래픽</td><td>발표 자료나 한 장짜리 요약 그림</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>오디오 개요 맞춤설정</h3>
+    <pre data-copy>[수험생]이 이해하기 쉽게, [부동산학개론 핵심 개념]을 생활 속 예를 들어 설명해줘.</pre>
+    <button class="copy" type="button"><span class="ico">⧉</span>복사하기</button>
+  </div>
+
+  <div class="card">
+    <h3>퀴즈 맞춤설정</h3>
+    <pre data-copy>[최근 3개년 기출]에서 자주 나온 개념으로 객관식 [10]문제를 만들어줘.
+정답과 근거도 함께 알려줘.</pre>
+    <button class="copy" type="button"><span class="ico">⧉</span>복사하기</button>
+  </div>
+
+  <div class="card">
+    <h3>플래시카드 맞춤설정</h3>
+    <pre data-copy>[시험 직전]에 볼 수 있게, 꼭 외워야 할 용어 [20]개로 만들어줘.</pre>
+    <button class="copy" type="button"><span class="ico">⧉</span>복사하기</button>
+  </div>
+
+  <div class="card">
+    <h3>마인드맵·보고서 맞춤설정</h3>
+    <pre data-copy>처음 공부하는 사람이 전체 흐름을 한눈에 볼 수 있게 만들어줘.
+어려운 용어에는 짧은 설명을 붙여줘.</pre>
+    <button class="copy" type="button"><span class="ico">⧉</span>복사하기</button>
+  </div>
+</section>
+
+<!-- ───────────── 4. 나만의 노트북 ───────────── -->
+<section id="s4">
+  <div class="sec-head"><span class="sec-num">4</span><h2>나만의 노트북 아이디어</h2></div>
+  <p class="sec-note">자주 찾아보는 자료를 한 노트북에 모아 두면, 필요할 때 바로 물어볼 수 있습니다. 주제마다 노트북을 따로 만드세요.</p>
+
+  <div class="card">
+    <h3>건강검진 결과 이해하기</h3>
+    <p><strong>넣을 자료</strong> 건강검진 결과표, 건강보험공단 안내 자료</p>
+    <pre data-copy>[콜레스테롤]이 높은데, 생활에서 뭘 조심할까?</pre>
+    <button class="copy" type="button"><span class="ico">⧉</span>복사하기</button>
+  </div>
+
+  <div class="card">
+    <h3>연금·노후 자금 정리</h3>
+    <p><strong>넣을 자료</strong> 국민연금 안내문, 퇴직연금·보험 약관</p>
+    <pre data-copy>내 연금 종류와 받는 나이를 표로 정리해줘.</pre>
+    <button class="copy" type="button"><span class="ico">⧉</span>복사하기</button>
+  </div>
+
+  <div class="card">
+    <h3>여행 계획 세우기</h3>
+    <p><strong>넣을 자료</strong> 가이드북, 블로그 글, 유튜브 링크</p>
+    <pre data-copy>[무릎 아픈 부모님]과 갈 [2박 3일] 코스 짜줘.</pre>
+    <button class="copy" type="button"><span class="ico">⧉</span>복사하기</button>
+  </div>
+
+  <div class="card">
+    <h3>텃밭·귀농 공부</h3>
+    <p><strong>넣을 자료</strong> 농업기술센터 교육 자료, 재배 방법 영상</p>
+    <pre data-copy>[5월]에 심기 좋은 채소와 키우는 방법을 정리해줘.</pre>
+    <button class="copy" type="button"><span class="ico">⧉</span>복사하기</button>
+  </div>
+
+  <div class="note"><b>주의</b><p>개인정보가 담긴 자료는 주민등록번호, 계좌번호 등을 가리고 올리세요. 건강이나 돈에 관한 답은 참고용이며, 중요한 결정은 전문가와 확인하세요.</p></div>
+</section>
+
+<!-- ───────────── 체크리스트 ───────────── -->
+<section id="check">
+  <div class="sec-head"><span class="sec-num">✓</span><h2>꼭 지킬 것</h2></div>
+  <p class="sec-note">AI는 편리한 도구이지만 틀릴 때가 있습니다. 쓰기 전과 후에 확인하세요.</p>
+  <div class="card">
+    <ul class="check">
+      <li><input type="checkbox" id="c1"><label for="c1">AI가 알려준 장소, 운영 시간, 가격은 공식 홈페이지나 지도 앱에서 다시 확인했다.</label></li>
+      <li><input type="checkbox" id="c2"><label for="c2">내가 말하지 않은 내용이 글에 들어가지 않았는지 확인했다.</label></li>
+      <li><input type="checkbox" id="c3"><label for="c3">완성된 글을 소리 내어 읽어 보고, 내 목소리처럼 들리는지 확인했다.</label></li>
+      <li><input type="checkbox" id="c4"><label for="c4">자료를 올리기 전에 주민등록번호, 계좌번호, 전화번호 등 개인정보를 가렸다.</label></li>
+      <li><input type="checkbox" id="c5"><label for="c5">노트북 답의 근거 번호를 눌러 자료에 실제로 있는 내용인지 확인했다.</label></li>
+      <li><input type="checkbox" id="c6"><label for="c6">수업이 끝난 뒤 오른쪽 위 내 사진 → '로그아웃'을 눌렀다.</label></li>
+    </ul>
+  </div>
+</section>
+
+<div class="banner">
+  <span class="label">결과물 올리는 곳</span>
+  <span class="addr">bit.ly/업스킬링</span>
+</div>
+
+<div class="card" style="margin-top:24px">
+  <h3>QR코드 만들기</h3>
+  <p>내 블로그 글이나 노트북 주소를 넣으면 QR코드가 만들어집니다.</p>
+  <div class="qr-row">
+    <input type="text" id="qr-link" placeholder="https://example.com" aria-label="QR코드로 만들 주소">
+    <button type="button" id="qr-make">QR코드 만들기</button>
+  </div>
+  <div id="qrcode"></div>
+</div>
+
+<footer>
+  <p><b>마치기 전에 꼭</b> — 공용 컴퓨터는 로그아웃, 꼭 잊지 말아주세요!</p>
+  <p>다음 주에는 데이터 분석 · AI와 윤리 · 종합 실습을 합니다. 문의: cwh525@uos.ac.kr</p>
+</footer>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<script>
+(function(){
+  /* [대괄호] 부분 노란색 표시 (복사되는 문장은 그대로) */
+  document.querySelectorAll('pre[data-copy]').forEach(function(pre){
+    var raw = pre.textContent;
+    pre.setAttribute('data-copy', raw);
+    var html = raw
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;')
+      .replace(/\[[^\]]*\]/g,function(m){
+        return '<span class="ph">' + m + '</span>';
+      });
+    pre.innerHTML = html;
+  });
+
+  /* 복사 기능 */
+  function legacy(text){
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly','');
+    ta.style.position = 'fixed';
+    ta.style.top = '0';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    var ok = false;
+    try{ok=document.execCommand('copy')}catch(e){ok=false}
+    document.body.removeChild(ta);
+    return ok;
+  }
+  function copyText(text){
+    if(navigator.clipboard && window.isSecureContext){
+      return navigator.clipboard.writeText(text).then(
+        function(){return true},
+        function(){return legacy(text)}
+      );
+    }
+    return Promise.resolve(legacy(text));
+  }
+  function flash(btn,label){
+    var original=btn.dataset.label||btn.innerHTML;
+    btn.dataset.label=original;
+    btn.classList.add('done');
+    btn.innerHTML=label;
+    clearTimeout(btn._t);
+    btn._t=setTimeout(function(){
+      btn.classList.remove('done');
+      btn.innerHTML=btn.dataset.label;
+    },1800);
+  }
+  document.querySelectorAll('button.copy').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var pre=btn.parentElement.querySelector('pre[data-copy]');
+      if(!pre) return;
+      copyText(pre.getAttribute('data-copy')).then(function(ok){
+        flash(btn,ok?'복사됐습니다':'복사가 안 됩니다');
+      });
+    });
+  });
+  document.querySelectorAll('button.chip').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      copyText(btn.getAttribute('data-copy')).then(function(ok){
+        flash(btn,ok?'복사됐습니다':'복사가 안 됩니다');
+      });
+    });
+  });
+
+  /* 글자 크기 */
+  var STEPS=[1,1.15,1.32,1.5];
+  var idx=0;
+  try{
+    var saved=localStorage.getItem('uskill-size');
+    if(saved!==null) idx=Math.min(STEPS.length-1,Math.max(0,parseInt(saved,10)||0));
+  }catch(e){}
+  function apply(){
+    document.documentElement.style.setProperty('--step',STEPS[idx]);
+    try{localStorage.setItem('uskill-size',String(idx))}catch(e){}
+  }
+  apply();
+  document.getElementById('bigger').addEventListener('click',function(){
+    if(idx<STEPS.length-1){idx++;apply()}
+  });
+  document.getElementById('smaller').addEventListener('click',function(){
+    if(idx>0){idx--;apply()}
+  });
+
+  /* QR코드 */
+  document.getElementById('qr-make').addEventListener('click',function(){
+    var link=document.getElementById('qr-link').value.trim();
+    var box=document.getElementById('qrcode');
+    if(!link){alert('링크를 입력해주세요.');return;}
+    box.innerHTML='';
+    if(typeof QRCode==='undefined'){box.textContent='QR코드 도구를 불러오지 못했습니다.';return;}
+    new QRCode(box,{text:link,width:200,height:200});
+  });
+})();
+</script>
+
+</body>
+</html>
